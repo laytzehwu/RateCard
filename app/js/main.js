@@ -8,12 +8,23 @@ var Checkout = function (pricelist) {
     var cart = {};
     this.cart = cart;
     this.add = function (productId) {
-        if(!cart.hasOwnProperty(productId)) {
-            cart[productId] = {
-                qty: 0
-            };
+        var productPrice = getBasicPrice(productId);
+        if( productPrice) {
+            if(!cart.hasOwnProperty(productId)) {
+                cart[productId] = {
+                    qty: 0
+                };
+            }
+            cart[productId].qty ++;
+        } else {
+            throw new Error('Product not found');
         }
-        cart[productId].qty ++;
+    }
+    
+    this.remove = function (productId) {
+        if(cart.hasOwnProperty(productId)) {
+            delete cart[productId];
+        }
     }
     
     var calculatePrice = function () {
