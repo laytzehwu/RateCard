@@ -116,4 +116,46 @@ describe('Checkout spec', function () {
         expect(checkout.total()).toEqual(expectTotal);
     });
     
+    it('Test on Ford', function () {
+        checkout.setDiscount(ford);
+        
+        checkout.add(classic.id);
+        checkout.add(classic.id);
+        checkout.add(classic.id);
+        checkout.add(classic.id);
+        var expectTotal = classic.price * 4;
+        expect(checkout.total()).toEqual(expectTotal);
+        checkout.add(classic.id);
+        expect(checkout.total()).toEqual(expectTotal);
+        checkout.add(classic.id);
+        expectTotal += classic.price;
+        expect(checkout.total()).toEqual(expectTotal);
+        checkout.remove(classic.id);
+        
+        checkout.add(standout.id);
+        expect(checkout.total()).toEqual(ford.standout.price);
+        expect(checkout.total()).not.toEqual(standout.price);
+        checkout.remove(standout.id);
+        
+        checkout.add(premium.id);
+        checkout.add(premium.id);
+        expectTotal = premium.price * 2;
+        expect(checkout.total()).toEqual(expectTotal);
+        checkout.add(premium.id);
+        expectTotal = ford.premium.price * 3;
+        expect(checkout.total()).toEqual(expectTotal);
+        checkout.add(premium.id);
+        expectTotal = ford.premium.price * 4;
+        expect(checkout.total()).toEqual(expectTotal);
+        checkout.remove(premium.id);
+        
+        for(var i=0;i<5;i++) checkout.add(classic.id);
+        expectTotal = classic.price * 4;
+        checkout.add(standout.id);
+        expectTotal += ford.standout.price;
+        for(var i=0;i<3;i++) checkout.add(premium.id);
+        expectTotal += ford.premium.price * 3;
+        expect(checkout.total()).toEqual(expectTotal);
+    });
+    
 });
