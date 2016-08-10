@@ -27,11 +27,34 @@ var Checkout = function (pricelist) {
         }
     }
     
+    var discountPrice;
+    this.setDiscount = function (discount) {
+        discountPrice = discount;
+    }
+    
     var calculatePrice = function () {
         var me = this;
         Object.keys(cart).forEach(function (productId) {
             var item = cart[productId];
-            item.subTotal = item.qty * getBasicPrice(productId).price;
+            var basicPrice = getBasicPrice(productId).price;
+            item.subTotal = item.qty * basicPrice;
+            
+            if(discountPrice && discountPrice.hasOwnProperty(productId)) {
+                var productDiscount = discountPrice[productId];
+                
+                if(productDiscount.hasOwnProperty('qty')) {
+                    if(productDiscount.qty <= item.qty) {
+                        item.subTotal = Math.floor(item.qty/productDiscount.qty) * productDiscount.price;
+                        item.subTotal += (item.qty % productDiscount.qty) * basicPrice;
+                    }
+                } else if(productDiscount.hasOwnProperty('minQty')) {
+                    if(productDiscount.minQty <= item.qty) {
+                        item.subTotal = item.qty * productDiscount.price;
+                    }
+                } else {
+                    item.subTotal = item.qty * productDiscount.price;
+                }
+            }
         });
     }
     
