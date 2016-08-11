@@ -1,4 +1,6 @@
 # RateCard
+A class Checkout has been built to implement the logic of basic price and special offer.
+
 ## Basic prices
 Default unit price is defined directly under product. 
 
@@ -18,6 +20,12 @@ Download the package and unzip it. Run below command to build it:
 ## Testing
 The unit test is built under jasmine frame and karma act as runner in NodeJS. It is currently only covered by Google Chrome test. To run the unit test you run below command:
 > npm test
+
+## Boot the dashboard
+In order to show the usability of checkout, you may run dashboard by below steps:
+1. Start the service by run below command:
+> npm run dev
+2. Open browser and access http://localhost:500. 
 
 ## Note
 Dual to the time consuming, this repo is cloned from one of the small project. I have tried to drop as much dependacy as I can. But some of the plug still not able to be dropped in this short of time being.
