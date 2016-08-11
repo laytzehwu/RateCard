@@ -21,6 +21,7 @@ The unit test is built under jasmine frame and karma act as runner in NodeJS. It
 
 ## Note
 Dual to the time consuming, this repo is cloned from one of the small project. I have tried to drop as much dependacy as I can. But some of the plug still not able to be dropped in this short of time being.
+Dashboard is built for showing the usability of Checkout. It is not fully cover by unit test.
 
 ## It just a POC
 Below works are lacking in POC:

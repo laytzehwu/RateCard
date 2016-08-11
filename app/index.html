@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Ad Booking</title>
+        <link rel="stylesheet" href="libs/bootstrap.min.css" />
+        <link rel="stylesheet" href="styles/style.css" />
+    </head>
+    <body>
+        <header>
+            <nav class="navbar navbar-inverse">
+                <div class="container">
+                    <div class="navbar-header">
+                        <a class="navbar-brand">Ad Booking Panel</a>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <section id="dashboard">
+            <div class="loading--bar container">
+                <h2>
+                    <i class="glyphicon glyphicon-refresh spin"></i>
+                    Loading ... ...
+                </h2>
+            </div>
+            <div class="container booking--form">
+                <div class="row">
+                    <div class="col-md-4 col-xs-12">Customer</div>
+                    <div class="col-md-8 col-xs-12">
+                        <select class="customer--selector"></select>
+                    </div>
+                    <div class="col-md-4 col-xs-12">Products</div>
+                    <div class="col-md-8 col-xs-12 product--list">
+                        <div class="sample--product--row" style="display: none">
+                            <label></label>
+                            <input type="number" value="0" min="0" maxlength="5">
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-xs-12">Total</div>
+                    <div class="col-md-8 col-xs-12 total--amount"></div>
+                </div>
+            </div>
+        </section>
+        <script src="libs/jquery.min.js"></script>
+        <script src="libs/bootstrap.min.js"></script>
+        <script src="js/main.js"></script>
+        <script>
+            $(document).ready(function () {
+                var dashboard = new Dashboard('#dashboard');
+                dashboard.start();
+                window.dashboard = dashboard;
+            });
+        </script>
+    </body>
+</html>

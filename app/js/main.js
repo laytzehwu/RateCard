@@ -1,3 +1,5 @@
+'use stict';
+
 var Checkout = function (pricelist) {
     var pricelist = pricelist || [];
     var getBasicPrice = function (productId) {
@@ -68,4 +70,122 @@ var Checkout = function (pricelist) {
         });
         return total;
     }
+}
+
+var setting = {
+    API_PATHS: {
+        products: '/api/products',
+        customers: '/api/customers'
+    }
+}
+
+var Dashboard = function (plate) {
+    var $plate = $(plate);
+    var me = this;
+    this.checkout;
+    this.customers = [];
+    this.products = [];
+    
+    var $loadBar = $plate.find('.loading--bar');
+    var $bookingForm = $plate.find('.booking--form');
+    this.showLoadingBar = function () {
+        $loadBar.show();
+        $bookingForm.hide();
+    }
+    
+    this.showBookingForm = function () {
+        $loadBar.hide();
+        $bookingForm.show();
+    }
+    
+    this.load = function (callback) {
+        me.showLoadingBar();
+        $.when($.getJSON(setting.API_PATHS.customers), $.getJSON(setting.API_PATHS.products)).then(function (r1, r2) {
+            
+            while(me.customers.length > 0) me.customers.pop();
+            while(me.products.length > 0) me.products.pop();
+            
+            r1[0].forEach(function (customer) {
+                me.customers.push(customer);
+            });
+
+            r2[0].forEach(function (product) {
+                me.products.push(product);
+            });
+            me.checkout = new Checkout(me.products);
+            
+            if(callback) callback();
+        });
+        
+    }
+    
+    var bindCustomerSelecoter = function () {
+        var $customerSelector = $plate.find('.customer--selector');
+        $customerSelector.empty();
+        var $option = $('<option></option>');
+        $option.text('No customer selected');
+        $customerSelector.append($option);
+        me.customers.forEach(function (customer) {
+            var $option = $('<option></option>');
+            $option.attr('value', customer.name);
+            $option.text(customer.name);
+            $customerSelector.append($option);
+        });
+        
+        $customerSelector.on('change', function (evt) {
+            evt.preventDefault();
+            var customerName = $customerSelector.val();
+            me.changeCustomer(customerName);
+            updateTotal();
+        });
+    }
+    
+    var $total = $plate.find('.total--amount');
+    var updateTotal = function () {
+        $total.text(me.checkout.total());
+    }
+    
+    var renderProductRows = function () {
+        var $sample = $plate.find('.sample--product--row');
+        me.products.forEach(function (product) {
+            var $productRow = $sample.clone();
+            $productRow.find('label').text(product.name);
+            $sample.parent().append($productRow);
+            $productRow.show();
+            var $productNum = $productRow.find('input[type="number"]');
+            $productNum.on('change', function () {
+                var $this = $(this);
+                me.checkout.remove(product.id);
+                for(var i=0;i<$this.val();i++) {
+                    me.checkout.add(product.id);
+                }
+                updateTotal();
+            });
+        });
+    }
+    
+    this.render = function () {
+        bindCustomerSelecoter();
+        renderProductRows();
+        me.showBookingForm();
+    }
+    
+    this.start = function () {
+        this.load(function () {
+            me.render();
+        });
+    }
+    
+    this.changeCustomer = function (customerName) {
+        var customer = this.customers.find(function (customer) {
+            return customer.name === customerName;
+        });
+        if(customer) {
+            this.checkout.setDiscount(customer.prices);
+        } else {
+            this.checkout.setDiscount(undefined);
+        }  
+         
+    }
+    
 }
