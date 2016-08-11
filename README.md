@@ -25,6 +25,7 @@ The unit test is built under jasmine frame and karma act as runner in NodeJS. It
 In order to show the usability of checkout, you may run dashboard by below steps:
 1. Start the service by run below command:
 > npm run dev
+
 2. Open browser and access http://localhost:500. 
 
 ## Note
