@@ -1,5 +1,7 @@
 # RateCard
-A class Checkout has been built to implement the logic of basic price and special offer.
+A class **Checkout** has been built to implement the logic of basic price and special offer.
+- [Source code] (https://github.com/laytzehwu/RateCard/blob/master/app/js/main.js)
+- [Unit Test] (https://github.com/laytzehwu/RateCard/blob/master/test/checkoutSpec.js)
 
 ## Basic prices
 Default unit price is defined directly under product. 
@@ -23,6 +25,7 @@ The unit test is built under jasmine frame and karma act as runner in NodeJS. It
 
 ## Boot the dashboard
 In order to show the usability of checkout, you may run dashboard by below steps:
+
 1. Start the service by run below command:
 > npm run dev
 
