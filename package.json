@@ -20,6 +20,8 @@
   "author": "Lay Tzeh Wu (laytzehwu@yahoo.com)",
   "license": "ISC",
   "devDependencies": {
+    "browserify": "10.0.0",
+    "express": "^4.14.0",
     "jasmine": "2.4.1",
     "jasmine-core": "^2.4.1",
     "karma": "0.13.22",

@@ -1,0 +1,44 @@
+[
+    {
+        "name": "Unilever",
+        "prices": {
+            "classic": {
+                "qty": 3,
+                "price": 539.98
+            }
+        }
+    },
+    {
+        "name": "Apple",
+        "prices": {
+            "standout": {
+                "price": 299.99
+            }
+        }
+    },
+    {
+        "name": "Nike",
+        "prices": {
+            "premium": {
+                "minQty": 4,
+                "price": 379.99
+            }
+        }
+    },
+    {
+        "name": "Ford",
+        "prices": {
+            "classic": {
+                "qty": 5,
+                "price": 1079.96
+            },
+            "standout": {
+                "price": 309.99
+            },
+            "premium": {
+                "minQty": 3,
+                "price": 389.99
+            }
+        }
+    }
+]
