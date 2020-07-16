@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "karma": "^4.2.0",
-    "lodash": "^4.17.14",
+    "lodash": "^4.17.19",
     "minimatch": "^3.0.4",
     "shell-quote": "^1.6.1"
   }
