@@ -36,6 +36,6 @@
     "karma": "^6.3.16",
     "lodash": "^4.17.21",
     "minimatch": "^3.0.4",
-    "shell-quote": "^1.6.1"
+    "shell-quote": "^1.7.3"
   }
 }
